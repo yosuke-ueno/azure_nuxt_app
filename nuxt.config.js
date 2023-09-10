@@ -51,6 +51,10 @@ export default {
     '@nuxtjs/dotenv'
   ],
 
+  publicRuntimeConfig: {
+    apiKey: process.env.OPENAI_API_KEY
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
