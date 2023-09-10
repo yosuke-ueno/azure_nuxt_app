@@ -1,10 +1,14 @@
-import { ref } from '@nuxtjs/composition-api'
+import { ref, useContext } from '@nuxtjs/composition-api'
 import axios from 'axios'
 
 const useApi = () => {
   const openaiResult = ref(null)
 
-  const apiKey = process.env.OPENAI_API_KEY
+  const { $config } = useContext()
+	
+	// const apiKey = process.env.OPENAI_API_KEY
+	const apiKey = $config.apiKey
+
 
   const params = {
     model: 'text-davinci-003',
