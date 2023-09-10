@@ -9,7 +9,7 @@ const useApi = () => {
   const params = {
     model: 'text-davinci-003',
     prompt: 'このAPIは便利だなあ',
-    max_tokens: 200
+    max_tokens: 100
   }
 
   const fetchOpenaiResult = async () => {
