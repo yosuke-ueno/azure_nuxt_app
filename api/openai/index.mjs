@@ -3,8 +3,8 @@ import axios from 'axios'
 
 export default async function (context, req) {
 	
-	// const apiKey = process.env.OPENAI_API_KEY
-	const apiKey = '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'
+	const apiKey = process.env.OPENAI_API_KEY
+	
 
 	const params = {
 		model: 'text-davinci-003',
