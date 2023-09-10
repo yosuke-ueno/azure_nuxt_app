@@ -5,7 +5,7 @@
     </h2>
     <div>
       <v-btn @click="fetchData()">
-        API送信
+        API送信(更新)
       </v-btn>
     </div>
     <div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref } from '@nuxtjs/composition-api' 
 
 export default defineComponent({
   setup () {
@@ -23,8 +23,11 @@ export default defineComponent({
 
     const fetchData = async () => {
       console.log('2')
-      const { text } = await (await fetch("/api/openai")).json()
-      data.value = await text
+      // const { text } = await (await fetch("/api/openai")).json()
+      // data.value = await text
+      const fetchData = await fetch('/api/openai')
+      data.value = await fetchData.json()
+      console.log('fetchData', data.value)
     }
 
     return {
