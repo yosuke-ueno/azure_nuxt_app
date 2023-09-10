@@ -1,7 +1,8 @@
-import fetch from 'node-fetch'
+import { ref } from '@nuxtjs/composition-api'
 import axios from 'axios'
 
-export default async function (context, req) {
+
+const useOpenaiApi = () => {
 	
 	const apiKey = process.env.OPENAI_API_KEY
 	
@@ -12,66 +13,31 @@ export default async function (context, req) {
 		max_tokens: 20
 	}
 
-	console.log('key', apiKey)
+	const data = ref(null)
 
-	const response = await axios.post(
-		'https://api.openai.com/v1/completions',
-		params,
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${apiKey}`
-			}
-		}
-	)
+	const fetchOpenaiResult = async () => {
+    try {
+      console.log('1')
+      const response = await axios.post(
+        'https://api.openai.com/v1/completions',
+        params,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`
+          }
+        }
+      )
+      data.value = response.data
+    } catch (error) {
+      console.error('An error occurred:', error)
+    }
+  }
 
-	if (response.status != 200) {
-		throw new Error(`HTTP error! Status: ${response.status}`)
+	return {
+		data,
+		fetchOpenaiResult
 	}
-
-	return response
-
-
-	// let data = null
-
-	// const fetchData = async () => {
-	// 	console.log('1')
-	// 	try {
-	// 		console.log('2')
-	// 		const response = await axios.post(
-	// 			'https://api.openai.com/v1/completions',
-	// 			params,
-	// 			{
-	// 				headers: {
-	// 					'Content-Type': 'application/json',
-	// 					Authorization: `Bearer ${apiKey}`
-	// 				}
-	// 			}
-	// 		)
-	// 		// console.log('response', response)
-	// 		data = response
-	// 	} catch (error) {
-	// 		console.error('An error occurred:', error)
-	// 	}
-	// }
-
-	await fetchData()
-	// const response = await axios.post(
-	// 	'https://api.openai.com/v1/completions',
-	// 	params,
-	// 	{
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 			Authorization: `Bearer ${apiKey}`
-	// 		}
-	// 	}
-	// )
-
-	console.log('data,', data)
-
-	return 
-	// context.res.json({
-	// 	text: response
-	// 	// text: 'Hello World'
-	// })
 }
+
+export default useOpenaiApi

@@ -1,4 +1,4 @@
-import { computed, ref } from '@nuxtjs/composition-api'
+import { ref } from '@nuxtjs/composition-api'
 import axios from 'axios'
 
 const useApi = () => {

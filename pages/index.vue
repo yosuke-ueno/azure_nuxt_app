@@ -4,7 +4,7 @@
       ChatGPT APITEST ~AXOIS~
     </h2>
     <div>
-      <v-btn @click="fetchData()">
+      <v-btn @click="fetchOpenaiData()">
         API送信(更新)
       </v-btn>
     </div>
@@ -16,23 +16,24 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api' 
+import useOpenaiApi from '~/api/openai/index.mjs'
 
 export default defineComponent({
   setup () {
-    const data = ref('')
+    // const fetchData = ref('')
 
-    const fetchData = async () => {
+    const { data, fetchOpenaiResult } = useOpenaiApi()
+
+    const fetchOpenaiData = async () => {
       console.log('2')
       // const { text } = await (await fetch("/api/openai")).json()
       // data.value = await text
-      const fetchData = await fetch('/api/openai')
-      data.value = await fetchData.json()
-      console.log('fetchData', data.value)
+      await fetchOpenaiResult()
     }
 
     return {
       data,
-      fetchData
+      fetchOpenaiData
     }
   }
 })
