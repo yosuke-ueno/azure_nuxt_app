@@ -15,6 +15,8 @@ const useOpenaiApi = () => {
 
 	const data = ref(null)
 
+	console.log('apiKey', apiKey)
+
 	const fetchOpenaiResult = async () => {
     try {
       console.log('1')
