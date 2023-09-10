@@ -12,6 +12,8 @@ const useApi = () => {
     max_tokens: 100
   }
 
+  console.log('apiKey2', apiKey)
+
   const fetchOpenaiResult = async () => {
     try {
       console.log('1')
